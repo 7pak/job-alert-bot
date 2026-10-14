@@ -1,0 +1,13 @@
+.git
+.venv
+data
+.env
+.env.*
+!.env.example
+config.yml
+profile.yml
+companies.yml
+cv.*
+deploy/.deploy.env
+**/__pycache__
+.ruff_cache

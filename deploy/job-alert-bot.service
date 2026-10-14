@@ -1,0 +1,27 @@
+[Unit]
+Description=job-alert-bot (instant job alerts on Telegram)
+After=network-online.target
+Wants=network-online.target
+# Never stop retrying after crashes.
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=jobbot
+Group=jobbot
+WorkingDirectory=/opt/job-alert-bot
+ExecStart=/opt/job-alert-bot/.venv/bin/python -m jobbot run
+Restart=always
+RestartSec=15
+Environment=PYTHONUNBUFFERED=1
+
+# Hardening: the bot can only write to its data folder.
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ReadWritePaths=/opt/job-alert-bot/data
+MemoryMax=1G
+
+[Install]
+WantedBy=multi-user.target

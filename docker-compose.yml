@@ -1,0 +1,27 @@
+# Create these first, or Docker turns each missing file into an empty folder:
+#   mkdir -p data
+#   jobbot init             (or copy config.example.yml, profile.example.yml, companies.example.yml
+#                            and .env.example to config.yml, profile.yml, companies.yml and .env)
+# Then:
+#   docker compose up -d --build
+#   docker compose logs -f
+# Works on Linux servers, and on Windows and macOS with Docker Desktop for local testing.
+services:
+  jobbot:
+    build: .
+    image: job-alert-bot:local
+    restart: unless-stopped
+    env_file: .env
+    # Your host user id, so files in ./data stay yours (Linux). Docker Desktop ignores it.
+    user: "${JOBBOT_UID:-1000}:${JOBBOT_GID:-1000}"
+    volumes:
+      - ./config.yml:/app/config.yml:ro
+      - ./profile.yml:/app/profile.yml:ro
+      - ./companies.yml:/app/companies.yml:ro
+      - ./data:/app/data
+      # Only for CV tailoring: put cv.md or cv.docx in ./cv and set tailoring.cv_file: cv/cv.md
+      # (or cv/cv.docx), and build with --build-arg EXTRAS="anthropic python-docx".
+      # - ./cv:/app/cv:ro
+    logging:
+      driver: json-file
+      options: {max-size: "10m", max-file: "3"}
