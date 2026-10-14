@@ -35,6 +35,24 @@ job-alert-bot polls company job boards (Greenhouse, Lever, Ashby, Workable, Smar
 - It never polls faster than the enforced minimums, and it backs off when a site asks.
 - It never sends your name, contact details or CV anywhere, except your CV to the model you chose when you tap ✍️ Tailor CV.
 
+## What you fill in
+
+Everything about you lives in a few files that `jobbot init` creates for you. They are gitignored, so they never end up in git or on GitHub. You never edit Python.
+
+| What | File | Where to get it | Needed? |
+|---|---|---|---|
+| Telegram bot token | `.env` → `TELEGRAM_BOT_TOKEN` | Message **@BotFather** in Telegram, send `/newbot` | Yes |
+| Your Telegram chat id | `.env` → `TELEGRAM_CHAT_ID` | Send your bot `/start`, then run `jobbot chat-id` | Yes |
+| Roles, region, countries, languages, salary floor | `profile.yml` | `jobbot init` fills it in from your answers | Yes |
+| Search words and which sources to use | `config.yml` | `jobbot init` fills it in from your roles and region | Yes |
+| Companies to watch | `companies.yml` | `jobbot init` copies a checked list for your region | Yes |
+| AI check of each post (Gemini) | `.env` → `GEMINI_API_KEY`, then `ai.enabled: true` in `config.yml` | Free key at [aistudio.google.com/apikey](https://aistudio.google.com/apikey) | Optional |
+| CV tailoring (Claude or Gemini) | `.env` → `ANTHROPIC_API_KEY` for Claude (or the `GEMINI_API_KEY` above), then `tailoring:` in `config.yml` (`enabled: true`, `provider: claude` or `gemini`, `model`) | Claude key at [console.anthropic.com](https://console.anthropic.com) | Optional |
+| Your CV | `cv.md` or `cv.docx` next to `config.yml` ([docs/tailoring.md](docs/tailoring.md)) | Your own CV | Only for tailoring |
+| Your server | `deploy/.deploy.env` → `JOBBOT_HOST=user@your-server-ip`, `JOBBOT_KEY=~/.ssh/id_ed25519` | Any Linux server you can SSH into | Only for 24/7 |
+
+Then run `jobbot check-config`. It checks every file, tells you what is missing and points to the line of any mistake.
+
 ## Quickstart (about 15 minutes)
 
 You need Python 3.11 or newer and a Telegram account.
@@ -87,7 +105,17 @@ Adjust until the dry run looks right. `-v` lists dropped jobs with the reason (`
 jobbot run
 ```
 
-For 24/7 alerts, put it on a server: see [docs/deployment.md](docs/deployment.md) (systemd or Docker, with notes for Oracle Cloud, Google Cloud, AWS, Hetzner and Raspberry Pi).
+**6. Put it on a server (optional, for 24/7 alerts)**
+
+Fill in `deploy/.deploy.env` (copy it from `deploy/.deploy.env.example`) with your server's address and SSH key, then:
+
+```bash
+scp deploy/setup_server.sh user@your-server-ip:/tmp/ && ssh user@your-server-ip 'sudo bash /tmp/setup_server.sh'   # once
+bash deploy/deploy.sh --with-secrets    # first deploy, also copies .env
+bash deploy/deploy.sh                   # every update after that
+```
+
+Prefer Docker? `mkdir -p data && docker compose up -d --build`. Full guide, with notes for Oracle Cloud, Google Cloud, AWS, Hetzner and Raspberry Pi: [docs/deployment.md](docs/deployment.md).
 
 ## Commands
 
