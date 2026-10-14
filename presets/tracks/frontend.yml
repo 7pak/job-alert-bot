@@ -1,0 +1,20 @@
+# Frontend web engineering (React, Vue, Angular, TypeScript).
+name: frontend
+label: frontend
+title_any:
+  - frontend
+  - front-end
+  - front end
+  - web developer
+  - web engineer
+  - ui engineer
+  - ui developer
+  - "re:(?<![a-z])(?:react|angular|vue|javascript|typescript|next\\.?js) (?:developer|engineer)"
+title_exclude: [react native, backend, back-end]
+description_signals: [react, typescript, javascript, css, next.js, vue, angular, tailwind]
+levels: [junior, mid, senior]
+bonus:
+  - {terms: [react, typescript], title: 0.3, description: 0.1}
+ai_description: Frontend web engineering roles (React, TypeScript, modern web).
+# Search terms `jobbot init` puts in config.yml (search sources).
+search_queries: [frontend developer, react developer]

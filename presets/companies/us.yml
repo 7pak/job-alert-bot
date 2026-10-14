@@ -1,0 +1,29 @@
+# Region list: companies with open jobs in the US (boards checked live on 2026-10-14).
+# Use it with `companies_file: presets/companies/us.yml` in config.yml, or copy it to companies.yml.
+# Grow it with: python tools/discover_companies.py --region us
+
+greenhouse:
+- {name: Stripe, token: stripe}
+- {name: Airbnb, token: airbnb}
+- {name: Databricks, token: databricks}
+- {name: Figma, token: figma}
+- {name: Coinbase, token: coinbase}
+- {name: Lyft, token: lyft}
+- {name: Dropbox, token: dropbox}
+- {name: Robinhood, token: robinhood}
+- {name: Discord, token: discord}
+- {name: GitLab, token: gitlab}
+- {name: Datadog, token: datadog}
+- {name: Reddit, token: reddit}
+- {name: Instacart, token: instacart}
+- {name: Pinterest, token: pinterest}
+- {name: Asana, token: asana}
+- {name: Airtable, token: airtable}
+- {name: Gusto, token: gusto}
+- {name: Anthropic, token: anthropic}
+ashby:
+- {name: Ramp, token: ramp}
+- {name: Notion, token: notion}
+- {name: Linear, token: linear}
+- {name: OpenAI, token: openai}
+- {name: Vanta, token: vanta}

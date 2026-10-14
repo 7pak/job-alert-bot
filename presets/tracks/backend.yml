@@ -1,0 +1,20 @@
+# Backend engineering (APIs, services, databases).
+name: backend
+label: backend
+title_any:
+  - backend
+  - back-end
+  - back end
+  - api engineer
+  - api developer
+  - "re:(?<![a-z])(?:python|java|golang|go|node(?:\\.?js)?|ruby|rails|php|laravel|django|\\.net|c#|scala|elixir|rust) (?:developer|engineer)"
+title_exclude: [frontend, front-end, front end]
+description_signals: [rest api, microservices, postgresql, mysql, django, spring boot, node.js, golang, kafka, redis,
+                      fastapi, grpc]
+levels: [junior, mid, senior]
+bonus:
+  # Edit to your own stack.
+  - {terms: [python, go, golang, java, node.js, typescript], title: 0.3, description: 0.1}
+ai_description: Backend engineering roles (APIs, services, databases).
+# Search terms `jobbot init` puts in config.yml (search sources).
+search_queries: [backend developer, python developer, java developer]

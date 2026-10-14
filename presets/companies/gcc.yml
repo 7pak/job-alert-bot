@@ -1,0 +1,201 @@
+# Region list: companies with open jobs in the GCC (boards checked live on 2026-10-14).
+# Use it with `companies_file: presets/companies/gcc.yml` in config.yml, or copy it to companies.yml.
+# Grow it with: python tools/discover_companies.py --region gcc
+
+greenhouse:
+- {name: Careem, token: careem}
+- {name: Tamara, token: tamara}
+- {name: BRKZ, token: brkz}
+- {name: Bybit, token: bybit}
+- {name: Deliveroo, token: deliveroo}
+- {name: OKX, token: okx}
+- {name: Decima International, token: decimainternational}
+- {name: Kitchen Park, token: kitchenpark}
+- {name: AudioMob, token: audiomob}
+- {name: Scale AI, token: scaleai}
+- {name: Anduril, token: andurilindustries}
+- {name: Artefact, token: artefact}
+- {name: DataCamp, token: datacamp}
+- {name: Lucid Motors, token: lucidmotors}
+- {name: Geotab, token: geotab}
+- {name: Elastic, token: elastic}
+- {name: Jensen Hughes, token: jensenhughes}
+- {name: Meridial, token: agency}
+- {name: The PAC Group, token: thepacgroup}
+- {name: Axon, token: axon}
+- {name: Vatic Labs, token: vaticlabs}
+- {name: General Assembly, token: generalassembly}
+- {name: InterSystems, token: intersystems}
+- {name: 'AcuTech Group, Inc.', token: acutechgroupinc}
+- {name: AIFT, token: aift}
+- {name: Armada, token: armada}
+- {name: Capco, token: capco}
+- {name: MinIO, token: minio}
+- {name: Nozomi Networks, token: nozominetworks}
+- {name: OpenFX, token: openfx}
+- {name: Everpure, token: purestorage}
+- {name: Qube Research & Technologies, token: quberesearchandtechnologies}
+- {name: Telnyx, token: telnyx54}
+- {name: Veeam Software, token: veeamsoftware}
+- {name: Celonis, token: celonis}
+- {name: Censys, token: censys}
+- {name: Cognite - AI for Industry, token: cognite}
+- {name: 'Couchbase, Inc.', token: couchbaseinc}
+- {name: Interview Engineering, token: interviewengineering}
+- {name: Recorded Future, token: recordedfuture}
+- {name: Ultima Genomics, token: ultimagenomics}
+- {name: Zscaler, token: zscaler}
+- {name: Addepar, token: addepar1}
+- {name: Alpaca, token: alpaca}
+- {name: Alpha Financial Markets Consulting, token: alphafmcroles}
+- {name: Anaplan, token: anaplan}
+- {name: Appian Corporation, token: appian}
+- {name: Appspace, token: appspace}
+- {name: Atlas HXM, token: atlasxhm}
+- {name: BeyondTrust, token: beyondtrust}
+- {name: Bidease, token: bidease}
+- {name: Bloomreach, token: bloomreach}
+- {name: Boomi, token: boomilp}
+- {name: Braze, token: braze}
+- {name: Cobblestone Energy, token: cobblestoneenergy}
+- {name: Cobblestone Energy, token: cobblestoneenergy1}
+- {name: Cobblestone Energy, token: cobblestoneenergy4}
+- {name: 'Crunchyroll, LLC', token: crunchyroll}
+- {name: Diligent Corporation, token: diligentcorporation}
+- {name: dmg events, token: dmgevents}
+- {name: Dragos, token: dragos}
+- {name: DriveWealth, token: drivewealth}
+- {name: DV Trading, token: dvtrading}
+- {name: EBANX, token: ebanx}
+- {name: Ebury, token: ebury}
+- {name: FeverUp, token: feverup}
+- {name: GitLab, token: gitlab}
+- {name: Guidepoint, token: guidepoint}
+- {name: iCapital, token: icapitalnetwork}
+- {name: InMobi, token: inmobi}
+- {name: Janes, token: janes}
+- {name: Landor, token: landor}
+- {name: Ogilvy MENA, token: ogilvymena}
+- {name: OLIVER Agency, token: oliver}
+- {name: Pallet, token: pallet}
+- {name: Pharo Management, token: pharomanagement}
+- {name: Planet, token: planetlabs}
+- {name: Point72, token: point72}
+- {name: Prosek Partners, token: prosek}
+- {name: Rondo Energy, token: rondoenergy}
+- {name: Schonfeld, token: schonfeld}
+- {name: Sony Music Global Job Board, token: sonymusicentertainment}
+- {name: Sotheby's, token: sothebys}
+- {name: Summit Therapeutics, token: summittherapeutics}
+- {name: Teads, token: teads1}
+- {name: The Economist Group, token: theeconomistgroup}
+- {name: Valtech, token: valtech}
+- {name: Verkada, token: verkada}
+- {name: Wall Street Prep, token: wallstreetprep}
+- {name: Wheely, token: wheely}
+- {name: Winton, token: winton}
+- {name: Backbase, token: workatbackbase}
+- {name: WPP Media, token: wppmedia}
+- {name: Xantium, token: xantium}
+lever:
+- {name: Aldar, token: aldar}
+- {name: eConstruct, token: econstruct}
+- {name: Flow, token: flowlife}
+- {name: 1inch, token: 1inch}
+- {name: Binance, token: binance}
+- {name: Crypto.com, token: crypto}
+- {name: Palantir, token: palantir}
+- {name: Trendyol, token: trendyol}
+- {name: Xsolla, token: xsolla}
+- {name: Loft Orbital, token: loftorbital}
+- {name: Ifm Us, token: ifm-us}
+- {name: Cabonorte, token: cabonorte}
+- {name: Rws, token: rws}
+- {name: Zeeco, token: zeeco}
+- {name: Pingwind, token: pingwind}
+- {name: Tsmg, token: tsmg}
+- {name: Capital, token: capital}
+- {name: Extremenetworks, token: extremenetworks}
+- {name: Incorta, token: incorta}
+- {name: Paytm, token: paytm}
+- {name: Ajax, token: ajax}
+- {name: Anomali, token: anomali}
+- {name: Anybotics, token: anybotics}
+- {name: Appen, token: appen}
+- {name: Certik, token: certik}
+- {name: Coins, token: coins}
+- {name: Contentsquare, token: contentsquare}
+- {name: Daos Hub, token: daos-hub}
+- {name: Dlocal, token: dlocal}
+- {name: Equativ, token: equativ}
+- {name: Firstup, token: firstup}
+- {name: Getwingapp, token: getwingapp}
+- {name: Kpler, token: kpler}
+- {name: Lalamove, token: lalamove}
+- {name: Safran Ai, token: safran-ai}
+- {name: Shieldai, token: shieldai}
+- {name: Sitetracker, token: sitetracker}
+- {name: Sophos, token: sophos}
+- {name: Spotify, token: spotify}
+- {name: Titanwh, token: titanwh}
+- {name: Usasurveyjob, token: usasurveyjob}
+- {name: Visioninvest, token: visioninvest}
+- {name: Websummit, token: websummit}
+ashby:
+- {name: Ziina, token: ziina}
+- {name: Lean Technologies, token: leantech}
+- {name: Thndr, token: thndr}
+- {name: Kraken, token: kraken.com}
+- {name: MEX Digital, token: mexdigital}
+- {name: Cohere, token: cohere}
+- {name: ElevenLabs, token: elevenlabs}
+- {name: Cognition, token: cognition}
+- {name: OpenAI, token: openai}
+- {name: Taptap Send, token: taptapsend}
+- {name: Brainco, token: brainco}
+- {name: Lilt Production, token: lilt-production}
+- {name: Legora, token: legora}
+- {name: Asula, token: asula}
+- {name: Breakmark, token: breakmark}
+- {name: Camunda, token: camunda}
+- {name: Delinea, token: delinea}
+- {name: Gecko Robotics, token: gecko-robotics}
+- {name: Harmattan Ai, token: harmattan-ai}
+- {name: Illumio, token: illumio}
+- {name: Infinitefield, token: infinitefield}
+- {name: Kong, token: kong}
+- {name: Netgear, token: netgear}
+- {name: Paradox, token: paradox}
+- {name: Sardine, token: sardine}
+- {name: Snowflake, token: snowflake}
+- {name: Tenex, token: tenex}
+- {name: The Exploration Company, token: the-exploration-company}
+- {name: The Studio, token: the-studio}
+- {name: Uipath, token: uipath}
+- {name: Airwallex, token: airwallex}
+- {name: Alan, token: alan}
+- {name: Alcazar Energy, token: alcazar-energy}
+- {name: Cambly, token: cambly}
+- {name: Column, token: column}
+- {name: Deliveroo, token: deliveroo}
+- {name: Easygenerator, token: easygenerator}
+- {name: Filigran, token: filigran}
+- {name: Horizon3Ai, token: horizon3ai}
+- {name: Iceye, token: iceye}
+- {name: Immersivelabs, token: immersivelabs}
+- {name: Kyra, token: kyra}
+- {name: Nash, token: nash}
+- {name: Pavebank, token: pavebank}
+- {name: Rogo, token: rogo}
+- {name: Teamworks, token: teamworks}
+- {name: Toogeza, token: toogeza}
+workable:
+- {name: Salla, token: salla}
+- {name: Foodics, token: foodics}
+- {name: Lucidya, token: lucidya}
+- {name: Mozn, token: mozn-ai}
+smartrecruiters:
+- name: Delivery Hero (talabat)
+  token: deliveryhero
+  countries: [ae, sa, kw, qa, bh, om]
+- {name: Namshi, token: namshi}

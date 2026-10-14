@@ -1,0 +1,53 @@
+# Region pack: the Gulf (UAE, Saudi Arabia, Qatar, Kuwait, Bahrain, Oman).
+# Use it with `region: gcc` in profile.yml. Anything you set in profile.yml wins.
+# To prefer one country, copy `targets` into your profile and raise its bonus (see docs/configuration.md).
+
+locations:
+  region_name: GCC
+  targets:
+    - name: UAE
+      terms: [uae, u.a.e, united arab emirates, emirates, dubai, abu dhabi, sharjah, ajman, ras al khaimah,
+              fujairah, umm al quwain]
+    - name: Saudi Arabia
+      terms: [saudi, saudi arabia, ksa, riyadh, jeddah, dammam, khobar, neom]
+    - {name: Qatar, terms: [qatar, doha]}
+    - {name: Kuwait, terms: [kuwait]}
+    - {name: Bahrain, terms: [bahrain, manama]}
+    - {name: Oman, terms: [oman, muscat]}
+    - {name: GCC, terms: [gcc]}
+  # Remote regions that include the Gulf.
+  remote_ok_terms: [mena, emea, middle east, worldwide, anywhere, global, international, multiple locations, various]
+  confirm_remote_terms: [emea]
+
+work_authorization:
+  # Localisation quotas. A match drops the job (regexes, case ignored).
+  nationals_only_patterns:
+    - uae nationals?
+    - emirati
+    - emirati[sz]ation
+    - saudi nationals?(?! bank)
+    - saudi[sz]ation
+    - nitaqat
+    - qatari
+    - qatari[sz]ation
+    - kuwaiti nationals?
+    - kuwaiti[sz]ation
+    - omani nationals?
+    - omani[sz]ation
+    - bahraini nationals?
+    - gcc nationals?
+    - nationals only
+    - local nationals?
+    - citizens only
+  nationals_examples: UAE nationals, Emiratisation, Saudi nationals, Saudisation, Qatari, etc.
+
+salary:
+  currency: AED
+
+# Used by `jobbot init` to fill in config.yml and suggest a timezone.
+search:
+  timezone: Asia/Dubai
+  locations: [United Arab Emirates, Saudi Arabia, Qatar]
+  country: AE
+  careerjet_locale: en_AE
+  linkedin_location: United Arab Emirates

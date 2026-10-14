@@ -1,0 +1,11 @@
+# Full stack web engineering.
+name: fullstack
+label: full stack
+title_any: [full stack, full-stack, fullstack]
+description_signals: [react, node.js, typescript, django, rails, next.js, postgresql]
+levels: [junior, mid, senior]
+bonus:
+  - {terms: [react, node.js, typescript, python], description: 0.2}
+ai_description: Full stack web engineering roles.
+# Search terms `jobbot init` puts in config.yml (search sources).
+search_queries: [full stack developer]

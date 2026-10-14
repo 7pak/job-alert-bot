@@ -1,0 +1,29 @@
+# Region list: companies with open jobs in Germany, Austria or Switzerland (boards checked live
+# on 2026-10-14). Use it with `companies_file: presets/companies/dach.yml` in config.yml, or copy it
+# to companies.yml and edit. Grow it with: python tools/discover_companies.py --region dach
+
+greenhouse:
+- {name: N26, token: n26}
+- {name: Celonis, token: celonis}
+- {name: HelloFresh, token: hellofresh}
+- {name: GetYourGuide, token: getyourguide}
+- {name: Contentful, token: contentful}
+- {name: SumUp, token: sumup}
+- {name: Raisin, token: raisin}
+- {name: Helsing, token: helsing}
+- {name: commercetools, token: commercetools}
+- {name: Moonfare, token: moonfare}
+- {name: Scandit, token: scandit}
+- {name: Grover, token: grover}
+- {name: Solaris, token: solarisbank}
+- {name: Datadog, token: datadog}
+- {name: GitLab, token: gitlab}
+- {name: Elastic, token: elastic}
+ashby:
+- {name: DeepL, token: deepl}
+- {name: n8n, token: n8n}
+- {name: Langdock, token: langdock}
+- {name: Enpal, token: enpal}
+- {name: Pliant, token: pliant}
+- {name: Upvest, token: upvest}
+- {name: Knowunity, token: knowunity}

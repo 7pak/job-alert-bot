@@ -1,0 +1,14 @@
+# QA and test automation.
+name: qa
+label: QA
+title_any: [qa, quality assurance, sdet, test automation, automation tester, software tester, tester,
+            test engineer, qa engineer, quality engineer]
+# These words are excluded for other tracks by default; this track needs them.
+allow_title_words: [qa, quality, test, testing, tester, sdet]
+description_signals: [selenium, cypress, playwright, appium, test automation, pytest, jest, postman]
+levels: [junior, mid, senior]
+bonus:
+  - {terms: [playwright, cypress, selenium, appium], description: 0.2}
+ai_description: QA and test automation roles.
+# Search terms `jobbot init` puts in config.yml (search sources).
+search_queries: [qa engineer, test automation engineer]

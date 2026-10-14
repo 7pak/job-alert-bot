@@ -1,0 +1,22 @@
+# Region pack: United Kingdom. Use it with `region: uk` in profile.yml.
+locations:
+  region_name: the UK
+  targets:
+    - name: United Kingdom
+      terms: [united kingdom, UK, U.K., great britain, england, scotland, wales, northern ireland, london,
+              manchester, edinburgh, bristol, cambridge, oxford, birmingham, leeds, glasgow, belfast, cardiff]
+  remote_ok_terms: [UK, united kingdom, europe, emea, worldwide, anywhere, global, international,
+                    multiple locations, various]
+  confirm_remote_terms: [emea, europe]
+
+salary:
+  currency: GBP
+  period: year
+
+# Used by `jobbot init` to fill in config.yml and suggest a timezone.
+search:
+  timezone: Europe/London
+  locations: [United Kingdom]
+  country: GB
+  careerjet_locale: en_GB
+  linkedin_location: United Kingdom

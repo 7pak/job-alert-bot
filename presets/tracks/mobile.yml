@@ -1,0 +1,19 @@
+# Mobile engineering: Flutter, Android, Kotlin, React Native, cross-platform.
+# Want native iOS too? Add the `ios` preset ABOVE this one in profile.yml (the first matching track wins).
+name: mobile
+label: mobile
+title_any: [flutter, dart, android, kotlin, jetpack compose, react native]
+title_with_role: [mobile, cross-platform, cross platform, app, apps]
+description_signals: [flutter, kotlin, android, jetpack compose, react native]
+levels: [junior, mid, senior]
+bonus:
+  # Edit to your own stack: a title hit adds `title`, a description-only hit adds `description`.
+  - {terms: [flutter, kotlin, android], title: 0.5, description: 0.2}
+avoid:
+  # "Mobile Engineer (iOS)" is iOS-only. Remove this rule if you want iOS roles here.
+  - name: iOS
+    title_terms: [ios, swift, swiftui]
+    title_ok_with: [android, flutter, kotlin, cross-platform, cross platform, dart, react native]
+ai_description: Mobile engineering roles (Flutter, Android, Kotlin, React Native, cross-platform), not iOS-only.
+# Search terms `jobbot init` puts in config.yml (search sources).
+search_queries: [flutter developer, android developer, mobile developer]

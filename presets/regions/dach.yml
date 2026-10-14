@@ -1,0 +1,53 @@
+# Region pack: Germany, Austria, Switzerland. Use it with `region: dach` in profile.yml.
+locations:
+  region_name: DACH
+  targets:
+    - name: Germany
+      terms: [germany, deutschland, DE, berlin, munich, münchen, hamburg, frankfurt, cologne, köln, stuttgart,
+              düsseldorf, dusseldorf, leipzig, dresden, hannover, nuremberg, nürnberg, bremen, karlsruhe]
+    - name: Austria
+      terms: [austria, österreich, vienna, wien, graz, linz, salzburg, innsbruck]
+    - name: Switzerland
+      terms: [switzerland, schweiz, suisse, zurich, zürich, geneva, genève, basel, bern, lausanne, zug]
+  remote_ok_terms: [europe, EU, emea, dach, germany, CET, worldwide, anywhere, global, international,
+                    multiple locations, various]
+  confirm_remote_terms: [emea]
+
+# German titles, rewritten before matching: "Python-Entwickler (m/w/d)" is read as "Python developer".
+title_aliases:
+  softwareentwickler: software developer
+  softwareentwicklerin: software developer
+  anwendungsentwickler: application developer
+  anwendungsentwicklerin: application developer
+  entwickler: developer
+  entwicklerin: developer
+  ingenieur: engineer
+  ingenieurin: engineer
+title_noise:
+  - '\((?:[mwdfx]|div|all genders?)(?:\s*/\s*(?:[mwdfx]|div))+\)'
+  - '\(all genders\)'
+  - '\(gn\)'
+
+seniority:
+  # Defaults plus the German words for student jobs and internships.
+  graduate_title_words: [graduate, intern, internship, trainee, apprentice, apprenticeship, campus, new grad,
+                         working student, werkstudent, werkstudentin, praktikum, praktikant, praktikantin,
+                         ausbildung, azubi, duales studium, abschlussarbeit, thesis]
+  # "Mindestens 7 Jahre Berufserfahrung", "5+ Jahre Erfahrung", "3-5 Jahre relevante Berufserfahrung".
+  years_patterns:
+    - '(?<![\d.])(\d{1,2})\s*\+?\s*(?:(?:-|bis)\s*(\d{1,2})\s*)?jahre?n?\s+(?:\w+\s+){0,2}(?:berufserfahrung|erfahrung|praxiserfahrung)'
+
+salary:
+  currency: EUR
+  period: year
+  # Austrian posts must name the collective-agreement minimum: "ab EUR 52.000 brutto, Bereitschaft zur Überzahlung".
+  minimum_markers: [overpayment, over-payment, collective agreement, collective bargaining agreement,
+                    überzahlung, ueberzahlung, kollektivvertrag, mindestgehalt, mindestentgelt]
+
+# Used by `jobbot init` to fill in config.yml and suggest a timezone.
+search:
+  timezone: Europe/Berlin
+  locations: [Germany, Austria, Switzerland]
+  country: DE
+  careerjet_locale: de_DE
+  linkedin_location: Germany

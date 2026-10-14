@@ -1,0 +1,35 @@
+# companies.yml: the company job boards the bot polls. Copy to companies.yml and make it yours.
+# This example fits profile.example.yml (backend in DACH): employers with backend roles in Germany,
+# Austria or Switzerland, boards checked live on 2026-10-14.
+#
+# Ready-made region lists: presets/companies/ (dach, uk, us, gcc). `jobbot init --region us` uses one.
+# Find more boards for your region with:
+#   python tools/discover_companies.py --region dach        (or --countries "Germany,Berlin,Munich")
+#
+# name:    shown in alerts
+# token:   the board id in the job board URL, e.g. boards.greenhouse.io/<token>, jobs.lever.co/<token>,
+#          jobs.ashbyhq.com/<token>, apply.workable.com/<token>, jobs.smartrecruiters.com/<token>
+# enabled: false to pause one board
+# Lever EU boards: add `host: api.eu.lever.co`. SmartRecruiters: `countries: [de, at]` lists only those.
+
+greenhouse:
+  - {name: Celonis, token: celonis}
+  - {name: GetYourGuide, token: getyourguide}
+  - {name: SumUp, token: sumup}
+  - {name: Solaris, token: solarisbank}
+  - {name: commercetools, token: commercetools}
+  - {name: N26, token: n26}
+  - {name: Raisin, token: raisin}
+  - {name: Helsing, token: helsing}
+
+ashby:
+  - {name: Pliant, token: pliant}
+  - {name: Upvest, token: upvest}
+  - {name: n8n, token: n8n}
+  - {name: Langdock, token: langdock}
+
+lever: []
+
+workable: []
+
+smartrecruiters: []

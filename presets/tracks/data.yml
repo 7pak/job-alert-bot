@@ -1,0 +1,22 @@
+# Data roles: analyst, engineer, scientist, analytics engineer, BI.
+name: data
+label: data
+title_any:
+  - data analyst
+  - data engineer
+  - data scientist
+  - analytics engineer
+  - data analytics
+  - business intelligence
+  - bi analyst
+  - bi developer
+  - bi engineer
+  - "re:(?<![a-z])(?:sql|etl) (?:developer|engineer)"
+allow_title_words: [analyst]     # "analyst" is excluded for other tracks by default
+description_signals: [sql, dbt, airflow, spark, tableau, power bi, looker, snowflake, bigquery, pandas]
+levels: [junior, mid, senior]
+bonus:
+  - {terms: [sql, python], title: 0.2, description: 0.2}
+ai_description: Data roles (data analyst, data engineer, data scientist, analytics engineer, BI).
+# Search terms `jobbot init` puts in config.yml (search sources).
+search_queries: [data engineer, data analyst, data scientist]

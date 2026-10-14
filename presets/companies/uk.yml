@@ -1,0 +1,24 @@
+# Region list: companies with open jobs in the UK (boards checked live on 2026-10-14).
+# Use it with `companies_file: presets/companies/uk.yml` in config.yml, or copy it to companies.yml.
+# Grow it with: python tools/discover_companies.py --region uk
+
+greenhouse:
+- {name: Monzo, token: monzo}
+- {name: GoCardless, token: gocardless}
+- {name: Deliveroo, token: deliveroo}
+- {name: Tide, token: tide}
+- {name: Datadog, token: datadog}
+- {name: Stripe, token: stripe}
+- {name: GitLab, token: gitlab}
+- {name: Elastic, token: elastic}
+ashby:
+- {name: Synthesia, token: synthesia}
+- {name: ElevenLabs, token: elevenlabs}
+- {name: Wayve, token: wayve}
+- {name: Lendable, token: lendable}
+- {name: Motorway, token: motorway}
+- {name: Granola, token: granola}
+- {name: Linear, token: linear}
+lever:
+- {name: Palantir, token: palantir}
+- {name: Spotify, token: spotify}

@@ -1,0 +1,13 @@
+# DevOps, SRE, cloud and platform engineering.
+name: devops
+label: DevOps
+title_any: [devops, dev ops, devsecops, sre, site reliability, platform engineer, cloud engineer,
+            infrastructure engineer, kubernetes engineer]
+title_with_role: [cloud, infrastructure, platform]
+description_signals: [kubernetes, terraform, aws, gcp, azure, docker, ci/cd, ansible, helm, prometheus]
+levels: [junior, mid, senior]
+bonus:
+  - {terms: [kubernetes, terraform, aws], title: 0.2, description: 0.2}
+ai_description: DevOps, SRE, cloud and platform engineering roles.
+# Search terms `jobbot init` puts in config.yml (search sources).
+search_queries: [devops engineer, site reliability engineer, cloud engineer]

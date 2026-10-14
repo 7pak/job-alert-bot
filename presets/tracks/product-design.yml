@@ -1,0 +1,15 @@
+# Product, UX and UI design.
+name: product-design
+label: product design
+title_any: [product designer, ux designer, ui designer, ui/ux, ux/ui, ux researcher, interaction designer,
+            visual designer, product design]
+# "designer" and "design" are excluded for other tracks by default; this track needs them.
+allow_title_words: [designer, design]
+title_exclude: [interior, fashion, graphic, instructional, game designer, hardware]
+description_signals: [figma, prototyping, design system, user research, wireframes, usability]
+levels: [junior, mid, senior]
+bonus:
+  - {terms: [figma], description: 0.2}
+ai_description: Product, UX and UI design roles (not graphic or interior design).
+# Search terms `jobbot init` puts in config.yml (search sources).
+search_queries: [product designer, ux designer]

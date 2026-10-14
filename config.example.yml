@@ -1,0 +1,91 @@
+# config.yml: how the bot runs. Copy this file to config.yml (or run `jobbot init`).
+# Secrets go in .env, your targeting in profile.yml, company boards in companies.yml.
+# Full reference: docs/configuration.md. Check your edits with: jobbot check-config
+
+poll_seconds: 180            # default interval for company boards (minimum 60)
+max_job_age_hours: 48        # do not alert jobs posted longer ago than this
+alert_min_score: 3.0         # keyword score 1-5; alert at or above this
+max_alerts_per_cycle: 15     # flood guard per source run; the rest wait for the next run
+max_backoff_seconds: 14400   # longest pause after HTTP 429 (4 h)
+request_timeout_seconds: 30
+db_path: data/jobs.db
+profile_file: profile.yml
+companies_file: companies.yml   # or a region list, e.g. presets/companies/gcc.yml
+log_level: INFO
+notifier: telegram           # telegram, or console (prints alerts, for testing)
+healthcheck_url: ""          # optional: pinged after good runs (e.g. https://hc-ping.com/your-uuid)
+
+# Salary conversion: how much one unit of each currency is worth in USD. Approximate, edit freely.
+# currency_rates: {USD: 1, EUR: 1.08, GBP: 1.27, AED: 0.2725, INR: 0.012}
+
+# Each source runs on its own timer in its own thread. Set enabled: false to switch one off.
+# Safe minimum intervals (enforced): ATS boards 60 s, Workable/SmartRecruiters 120 s,
+# search sources 300 s, Careerjet and LinkedIn 600 s.
+sources:
+  # Company boards from companies.yml. Public JSON APIs, the fastest signal.
+  greenhouse:      { interval_seconds: 180 }
+  lever:           { interval_seconds: 180 }
+  ashby:           { interval_seconds: 180 }
+  workable:        { interval_seconds: 600 }
+  smartrecruiters: { interval_seconds: 600 }
+
+  # Cross-company Workable search: finds employers you do not know yet.
+  workable_search:
+    interval_seconds: 1200
+    locations: [Germany, Austria, Switzerland]
+    queries: [backend developer, python developer, full stack developer]
+
+  # Remote jobs open to one country (ISO code).
+  himalayas:
+    interval_seconds: 1800
+    country: DE
+    queries: [backend, python, full stack]
+
+  # Aggregator. Snippets only. The legacy public API may need a free affiliate id
+  # (careerjet.com/partners) and may be retired without notice.
+  careerjet:
+    enabled: false
+    interval_seconds: 2700
+    locales: [de_DE]
+    affiliate_id: ""
+    queries: [backend developer, python developer]
+
+  # LinkedIn guest search. OFF by default: scraping is against LinkedIn's terms of use and it answers
+  # HTTP 429 after a few requests. If you switch it on, you do so at your own risk. The bot then runs
+  # ONE query per cycle (round robin) and backs off for hours after a 429.
+  linkedin:
+    enabled: false
+    interval_seconds: 900
+    time_window: r86400          # last 24 h
+    min_request_gap_seconds: 8
+    queries:
+      - { keywords: backend developer, location: Germany }
+
+# Optional AI scoring with Gemini (free tier). Put GEMINI_API_KEY in .env.
+# It reads the full post and drops hidden walls the keywords miss. Only public job posts and the
+# anonymous parts of profile.yml are sent. The free tier may use prompts for training.
+# If the AI fails or the daily cap is hit, alerts still go out on the keyword score.
+ai:
+  enabled: false
+  provider: gemini
+  models: [gemini-3.5-flash-lite, gemini-3.5-flash]   # tried in order; see `jobbot ai-models`
+  timeout_seconds: 25
+  min_score: 3.5               # alert only at or above this AI score
+  prefilter_min_score: 2.5     # keyword score needed before asking the AI
+  max_calls_per_day: 200
+  min_gap_seconds: 6
+  max_desc_chars: 12000
+
+# Optional CV tailoring: adds a [✍️ Tailor CV] button to alerts. Off by default.
+# Read docs/tailoring.md first. It never applies for you.
+tailoring:
+  enabled: false
+  provider: claude             # claude (pip install .[claude], ANTHROPIC_API_KEY) or gemini
+  model: claude-haiku-5-5      # stronger: claude-sonnet-5-5 (set price_per_mtok to 2.0 / 10.0)
+  cv_file: cv.md               # your CV, Markdown or .docx (gitignored)
+  docx: false                  # also send a .docx (pip install .[docx])
+  cover_letter: false
+  max_per_day: 10
+  max_cost_per_month_usd: 2.0
+  price_per_mtok: {input: 0.10, output: 0.50}   # USD per million tokens, for the cost cap
+  allow_free_tier: false       # Gemini free tier may train on prompts; true only for a paid key

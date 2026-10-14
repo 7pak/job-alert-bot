@@ -1,0 +1,71 @@
+# profile.yml: who you are and which jobs you want. Copy this file to profile.yml (or run `jobbot init`).
+# Every key is optional except `tracks`. Full reference: docs/configuration.md
+# Check your edits with: jobbot check-config
+
+name: backend in DACH            # a label for this profile, not your name
+
+# Anonymous summary for the optional AI scorer. Never put your name or contact details here.
+summary: |
+  - Backend engineer, about 3 years of experience with Python and PostgreSQL.
+  - Comfortable with REST APIs, Docker and AWS.
+years_experience: 3
+
+timezone: Europe/Berlin          # IANA name, used for "today" in /today and /stats
+
+# Region pack from presets/regions/ (gcc, dach, uk, us). It fills in locations and local rules.
+# Anything below overrides it.
+region: dach
+
+# Shown as positives in alerts when a post mentions them.
+skills:
+  main: [Python, Django, FastAPI, PostgreSQL, REST]
+  secondary: [Docker, AWS, Redis, Celery]
+
+# What you want, in priority order (the first matching track wins).
+# Start from a preset in presets/tracks/ and override any field, or write your own track.
+# Presets: mobile, ios, backend, frontend, fullstack, data, ai-ml, devops, qa, product-design
+tracks:
+  - preset: backend
+  - preset: fullstack
+    levels: [junior, mid]          # intern, junior, mid, senior, lead
+
+seniority:
+  max_years: 6                    # drop posts that ask for this many years or more
+  # blocked_title_words: [staff, principal, lead, head, director, vp, chief, architect, manager]
+  # allow_graduate_programs: false
+
+locations:
+  home: Berlin
+  home_country: Germany
+  remote: region                  # anywhere | region (remote that allows you) | none
+  work_modes: [on-site, hybrid, remote]
+  # To prefer one place, list your own targets (first = highest bonus):
+  # targets:
+  #   - {name: Berlin, bonus: 0.4, terms: [berlin]}
+  #   - {name: Germany, bonus: 0.2, terms: [germany, munich, hamburg]}
+
+work_authorization:
+  citizenship: ""                 # optional, helps the AI spot "citizens only" walls
+  visa: ""
+  # Regexes. A post that matches is dropped (e.g. "citizens only", "security clearance").
+  nationals_only_patterns: []
+
+# Languages you can work in. A post that requires another language is dropped,
+# a "nice to have" language only adds a warning.
+languages:
+  - {name: english, level: fluent}
+  - {name: german, level: B1}
+
+salary:
+  min: 55000                      # 0 = no floor
+  currency: EUR                   # must be in currency_rates (config.yml)
+  period: year                    # month or year
+
+blocked:
+  title_keywords: [salesforce, sap, wordpress]
+  companies: []
+
+ai:
+  # Things the AI should only warn about, never drop for.
+  soft_issues: '"German preferred", one year more than you have, one missing framework'
+  notes: ""

@@ -1,0 +1,11 @@
+# Native iOS engineering (Swift, SwiftUI, UIKit).
+name: ios
+label: iOS
+title_any: [ios, swift, swiftui]
+description_signals: [swift, swiftui, uikit, xcode, combine]
+levels: [junior, mid, senior]
+bonus:
+  - {terms: [swift, swiftui], title: 0.4, description: 0.2}
+ai_description: Native iOS engineering roles (Swift, SwiftUI, UIKit).
+# Search terms `jobbot init` puts in config.yml (search sources).
+search_queries: [ios developer, swift developer]

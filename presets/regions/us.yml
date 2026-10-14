@@ -1,0 +1,24 @@
+# Region pack: United States. Use it with `region: us` in profile.yml.
+# "US" is matched case-sensitively, so "join us" is not read as a place.
+locations:
+  region_name: the US
+  targets:
+    - name: United States
+      terms: [united states, USA, US, U.S., U.S.A., new york, nyc, san francisco, bay area, seattle, austin,
+              boston, chicago, los angeles, denver, atlanta, washington dc, miami, dallas, houston,
+              san diego, portland, philadelphia, raleigh]
+  remote_ok_terms: [US, USA, united states, north america, americas, worldwide, anywhere, global, international,
+                    multiple locations, various]
+  confirm_remote_terms: [americas, north america]
+
+salary:
+  currency: USD
+  period: year
+
+# Used by `jobbot init` to fill in config.yml and suggest a timezone.
+search:
+  timezone: America/New_York
+  locations: [United States]
+  country: US
+  careerjet_locale: en_US
+  linkedin_location: United States

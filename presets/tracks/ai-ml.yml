@@ -1,0 +1,16 @@
+# AI / ML / LLM engineering.
+name: ai-ml
+label: AI
+title_with_role: [ai, ml, llm, llms, genai, gen ai, nlp, mlops, machine learning, artificial intelligence,
+                  generative ai, deep learning, computer vision, agentic]
+# "Senior Full-Stack Engineer, AI-Native" is a web role, not an AI role.
+title_exclude: [full stack, full-stack, fullstack, backend, back-end, frontend, front-end, web, devops, data engineer]
+description_signals: [llm, llms, langchain, langgraph, rag, pytorch, tensorflow, hugging face, fine-tuning,
+                      embeddings, generative ai]
+levels: [junior, mid, senior]
+weight: 0.3
+bonus:
+  - {terms: [python, pytorch, llm, llms, rag], description: 0.3}
+ai_description: AI / ML / LLM engineering roles.
+# Search terms `jobbot init` puts in config.yml (search sources).
+search_queries: [machine learning engineer, ai engineer]
