@@ -1,0 +1,69 @@
+# Test profile: GCC mobile + AI + junior software. Tests load this explicitly, never a user's profile.yml.
+name: test gcc mobile
+timezone: Asia/Dubai
+region: gcc
+
+skills:
+  main: [Flutter, Dart, BLoC, Riverpod, GetX, Provider, Kotlin, Jetpack Compose, Android, Firebase]
+  secondary: [Python, LLM, LLMs, LangChain, LangGraph, RAG, OpenAI, FastAPI, Agents]
+
+tracks:
+  - name: mobile
+    title_any: [flutter, dart, android, kotlin, ios, swift, react native, jetpack compose]
+    title_with_role: [mobile, cross-platform, cross platform, app, apps]
+    description_signals: [flutter, kotlin, android, jetpack compose]
+    levels: [junior, mid, senior]
+    bonus:
+      - {terms: [flutter], title: 1.0, description: 0.5}
+      - {terms: [kotlin, android, jetpack compose], title: 0.4, description: 0.2}
+    avoid:
+      - name: React Native
+        title_terms: [react native, react-native]
+        title_ok_with: [flutter]
+        description_terms: [react native, react-native]
+        description_ok_with: [flutter, kotlin, android, jetpack compose]
+      - name: iOS
+        title_terms: [ios, swift, swiftui]
+        title_ok_with: [android, flutter, kotlin, cross-platform, cross platform, dart]
+        rescued_by: [flutter]
+      - name: Swift
+        description_terms: [swift, swiftui]
+
+  - name: ai
+    label: AI
+    title_with_role:
+      - "re:(?<![a-z])(?:ai|ml|llms?|genai|gen ai|nlp|mlops)(?![a-z])|machine learning|artificial intelligence|generative|agentic|deep learning|computer vision"
+    title_exclude: ["re:full[- ]?stack|back[- ]?end|front[- ]?end|(?<![a-z])web(?![a-z])|devops|data engineer"]
+    description_signals: [llm, llms, langchain, langgraph, generative ai, genai, rag, openai, ai agents]
+    levels: [junior, mid]
+    weight: 0.6
+    bonus:
+      - {terms: ["re:python|llm|langchain|langgraph|agent"], description: 0.3}
+
+  - name: software
+    fallback: true
+    title_any:
+      - "re:software (?:engineer|developer)|full[- ]?stack|back[- ]?end|front[- ]?end|web (?:developer|engineer)|application (?:engineer|developer)|programmer|product engineer|founding engineer|(?:python|java|node(?:\\.?js)?|\\.net|php|golang|go|typescript|javascript|react) (?:developer|engineer)"
+    title_exclude: [embedded, firmware, salesforce, sap, devops, sre, security, infrastructure, data, qa, test,
+                    network, hardware, mainframe, cobol, erp, dynamics, servicenow]
+    levels: [junior]
+    bonus: [{junior_title: 0.2}]
+    note: General software role (not mobile or AI)
+
+locations:
+  home: Dubai
+  home_country: UAE
+  targets:
+    - name: UAE
+      bonus: 0.4
+      terms: [uae, u.a.e, united arab emirates, emirates, dubai, abu dhabi, sharjah, ajman, ras al khaimah,
+              fujairah, umm al quwain]
+    - {name: Saudi Arabia, terms: [saudi, saudi arabia, ksa, riyadh, jeddah, dammam, khobar, neom]}
+    - {name: Qatar, terms: [qatar, doha]}
+    - {name: Kuwait, terms: [kuwait]}
+    - {name: Bahrain, terms: [bahrain, manama]}
+    - {name: Oman, terms: [oman, muscat]}
+    - {name: GCC, terms: [gcc]}
+
+languages: [arabic, english]
+salary: {min: 8000, currency: AED, period: month}

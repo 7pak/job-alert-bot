@@ -1,0 +1,35 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Your own config (committed templates: *.example.yml)
+/config.yml
+/profile.yml
+/companies.yml
+deploy/.deploy.env
+
+# Your CV and anything made from it
+cv.*
+cv/
+output/
+tailored/
+
+# Runtime data (SQLite, caches, tailored CVs)
+data/
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+.ruff_cache/
+
+# Logs and editors
+*.log
+.vscode/
+.idea/
+.DS_Store
