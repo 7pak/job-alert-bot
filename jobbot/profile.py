@@ -111,6 +111,29 @@ DEFAULTS: dict = {
         ],
         "work_modes": ["on-site", "hybrid", "remote"],
         "ai_description": "",
+        # Places that count only when the post offers visa sponsorship or relocation: [{name, terms, bonus}].
+        "sponsored_targets": [],
+        # Region packs whose places are added to sponsored_targets, e.g. [dach, uk, eu].
+        "sponsored_regions": [],
+        # A remote job limited to a sponsored place, with no sponsorship: warn (alert with a warning) | sponsor | drop.
+        "sponsored_remote": "warn",
+        "sponsored_penalty": 0.3,   # taken off the score, so your own targets rank first
+        "sponsorship_terms": [
+            "visa sponsorship", "sponsor your visa", "sponsor visas", "sponsorship available", "sponsorship provided",
+            "sponsorship offered", "we sponsor", "we can sponsor", "we will sponsor", "will sponsor",
+            "visa support", "visa assistance", "relocation package", "relocation support", "relocation assistance",
+            "relocation bonus", "relocation allowance", "help you relocate", "help with relocation", "blue card",
+            "skilled worker visa", "work permit support",
+        ],
+        # Checked first: a match means the post refuses sponsorship.
+        "no_sponsorship_terms": [
+            r"re:\b(?:not|unable to|cannot|can't|can’t|won't|won’t)\s+(?:[\w-]+\s+){0,3}(?:sponsor|sponsorship)\b",
+            r"re:\bno\s+(?:visa\s+)?sponsorship\b",
+            r"re:\bsponsorship\s+(?:is\s+)?not\s+(?:available|offered|provided|possible)\b",
+            "without sponsorship", "without visa sponsorship",
+            "must have the right to work", "must already have the right to work", "existing right to work",
+            "must be eligible to work", "must hold a valid work permit", "must have a valid work permit",
+        ],
     },
     "work_authorization": {
         "visa": "",
@@ -194,6 +217,11 @@ def merged_profile(raw: dict, presets_dir: Path) -> dict:
     if raw.get("region"):
         data = deep_merge(data, _preset(presets_dir, "regions", str(raw["region"])))
     data = deep_merge(data, raw)
+    loc = data["locations"]
+    loc["sponsored_targets"] = list(loc.get("sponsored_targets") or [])
+    for name in loc.get("sponsored_regions") or []:
+        pack = _preset(presets_dir, "regions", str(name)).get("locations") or {}
+        loc["sponsored_targets"] += [{**t, "bonus": t.get("bonus", 0)} for t in pack.get("targets") or []]
     tracks = []
     for i, t in enumerate(data.get("tracks") or []):
         if isinstance(t, str):
@@ -292,6 +320,12 @@ class Profile:
     remote_ok: re.Pattern
     confirm_remote: re.Pattern
     region_lock_terms: list[str]
+    sponsored_targets: list[Target]
+    sponsored_any: re.Pattern
+    sponsored_remote: str
+    sponsored_penalty: float
+    sponsorship_yes: re.Pattern
+    sponsorship_no: re.Pattern
     work_modes: list[str]
     region_name: str
     home: str
@@ -415,6 +449,14 @@ def compile_profile(data: dict) -> Profile:
         remote_ok=terms_re(loc["remote_ok_terms"], caps_sensitive=True),
         confirm_remote=terms_re(loc["confirm_remote_terms"], caps_sensitive=True),
         region_lock_terms=[str(x) for x in loc["region_lock_terms"]],
+        sponsored_targets=[Target(str(x.get("name") or ""), terms_re(x.get("terms") or [], caps_sensitive=True),
+                                  _f(x.get("bonus"), 0.0)) for x in loc["sponsored_targets"]],
+        sponsored_any=terms_re([t for x in loc["sponsored_targets"] for t in x.get("terms") or []],
+                               caps_sensitive=True),
+        sponsored_remote=str(loc["sponsored_remote"]),
+        sponsored_penalty=_f(loc["sponsored_penalty"], 0.3),
+        sponsorship_yes=terms_re(loc["sponsorship_terms"]),
+        sponsorship_no=terms_re(loc["no_sponsorship_terms"]),
         work_modes=[str(m).lower() for m in loc["work_modes"]],
         region_name=loc.get("region_name") or "your target locations",
         home=loc.get("home") or "",

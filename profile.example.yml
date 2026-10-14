@@ -12,7 +12,7 @@ years_experience: 3
 
 timezone: Europe/Berlin          # IANA name, used for "today" in /today and /stats
 
-# Region pack from presets/regions/ (gcc, dach, uk, us). It fills in locations and local rules.
+# Region pack from presets/regions/ (gcc, dach, uk, us, eu). It fills in locations and local rules.
 # Anything below overrides it.
 region: dach
 

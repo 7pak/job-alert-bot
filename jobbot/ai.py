@@ -76,7 +76,17 @@ def _location_line(profile: Profile) -> str:
     remote = {"region": f", or remote that explicitly allows {home}",
               "anywhere": ", or remote from anywhere",
               "none": " (no remote roles)"}[profile.remote_policy]
-    return where + remote + "."
+    return where + remote + _sponsored_line(profile) + "."
+
+
+def _sponsored_line(profile: Profile) -> str:
+    names = list(dict.fromkeys(t.name for t in profile.sponsored_targets if t.name))
+    if not names:
+        return ""
+    line = f". Also {human_join(names)}, but only when the post offers visa sponsorship or relocation"
+    if profile.sponsored_remote == "warn":
+        line += " (remote roles limited to these places are acceptable too)"
+    return line
 
 
 def build_system_prompt(profile: Profile | None) -> str:
@@ -94,7 +104,14 @@ def build_system_prompt(profile: Profile | None) -> str:
                      'is required (not "nice to have").')
     region = profile.region_name
     home = profile.home_country or "the candidate's country"
-    if profile.remote_policy == "region":
+    names = list(dict.fromkeys(t.name for t in profile.sponsored_targets if t.name))
+    if names:
+        region = f"{region} (or {human_join(names)} with visa sponsorship offered)"
+    if names and profile.sponsored_remote == "warn" and profile.remote_policy == "region":
+        walls.append(f"On-site or hybrid outside {region}, or remote limited to regions that exclude {home} "
+                     f"and are not {human_join(names)}.")
+        walls.append("A post that says it cannot sponsor a visa, or requires an existing right to work there.")
+    elif profile.remote_policy == "region":
         walls.append(f"On-site or hybrid outside {region}, or remote limited to regions that exclude {home} "
                      "(US only, EU only, ...).")
     elif profile.remote_policy == "none":

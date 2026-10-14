@@ -173,6 +173,8 @@ def check_profile(prof: Loaded, presets: Path, rates: dict, report: schema.Repor
     loc = data["locations"]
     if loc["remote"] not in REMOTE_POLICIES:
         report.errors.append(f"{name}: locations.remote must be one of {', '.join(REMOTE_POLICIES)}.")
+    if loc["sponsored_remote"] not in ("warn", "sponsor", "drop"):
+        report.errors.append(f"{name}: locations.sponsored_remote must be warn, sponsor or drop.")
     bad = [m for m in loc["work_modes"] if str(m).lower() not in WORK_MODES]
     if bad:
         report.errors.append(f"{name}: locations.work_modes: unknown {bad}. Use {', '.join(WORK_MODES)}.")

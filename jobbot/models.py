@@ -55,6 +55,7 @@ class Verdict:
     positives: list[str] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
     track: str = ""             # profile track that matched
+    sponsored: str = ""         # sponsored place it passed for (locations.sponsored_targets), if any
     ai: object | None = None  # jobbot.ai.AiResult when the AI check ran
 
 

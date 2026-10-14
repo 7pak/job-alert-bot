@@ -100,6 +100,9 @@ def cmd_check_config(path: str | None) -> int:
         print(f"  track {t.name:<12} levels: {', '.join(t.levels)}" + ("  (fallback)" if t.fallback else ""))
     names = [t.name for t in p.targets] or ["none"]
     print(f"  locations: {', '.join(names)} · remote: {p.remote_policy} · work modes: {', '.join(p.work_modes)}")
+    if p.sponsored_targets:
+        places = list(dict.fromkeys(t.name for t in p.sponsored_targets))
+        print(f"  only with visa sponsorship: {', '.join(places)} · their remote jobs: {p.sponsored_remote}")
     print(f"  languages: {', '.join(s['name'] for s in p.spoken)} · max years: {p.max_years} · "
           f"salary floor: {p.salary_min:,.0f} {p.salary_currency}/{p.salary_period} · timezone: {p.timezone}")
 
@@ -152,7 +155,7 @@ def main() -> None:
     init = sub.add_parser("init", help="create your config files from the examples")
     init.add_argument("--track", action="append", metavar="PRESET",
                       help="role preset (repeatable or comma separated), e.g. --track backend --track data")
-    init.add_argument("--region", help="region pack (gcc, dach, uk, us) or none")
+    init.add_argument("--region", help="region pack (gcc, dach, uk, us, eu) or none")
     init.add_argument("--timezone", help="IANA timezone, e.g. America/New_York")
     init.add_argument("--force", action="store_true", help="replace files that already exist")
     init.add_argument("-y", "--yes", action="store_true", help="no questions, use the example's settings")

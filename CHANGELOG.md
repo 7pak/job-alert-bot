@@ -3,6 +3,12 @@
 All notable changes to this project are listed here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+- Sponsored places: `locations.sponsored_regions` and `sponsored_targets` count only when the post offers visa sponsorship or relocation. Refusals ("cannot sponsor", "must have the right to work") drop the job; remote jobs limited to those places alert with a warning (`sponsored_remote`).
+- Region pack `eu` (EU countries plus Norway and Switzerland).
+
 ## [0.1.0] - 2026-10-14
 
 First public release.

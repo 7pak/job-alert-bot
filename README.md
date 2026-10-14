@@ -21,6 +21,7 @@ job-alert-bot polls company job boards (Greenhouse, Lever, Ashby, Workable, Smar
 
 - **Fast.** Company boards are polled every few minutes, straight from the ATS APIs, which usually show jobs before the big aggregators do.
 - **Your targeting, as data.** Roles as tracks (with presets for mobile, iOS, backend, frontend, full stack, data, AI/ML, DevOps, QA and product design), seniority, target countries in priority order, remote policy, work authorization, languages, salary floor, blocked stacks and companies.
+- **Abroad only with a visa.** Add places that count only when the post offers visa sponsorship, e.g. live in the Gulf and get Germany, UK and EU jobs only when they sponsor.
 - **Hard filters that read the post.** "5+ years", "fluent German required", "US only", "nationals only", "graduate programme", low salaries.
 - **Telegram control.** Buttons for Applied / Skip with undo, plus `/today`, `/pause`, `/resume` and `/stats`.
 - **Optional AI check** (Gemini free tier) that reads the full post for hidden walls, with a fallback chain and a daily cap.
@@ -142,7 +143,7 @@ In Telegram: `/today` (today's matches), `/pause` and `/resume` (alerts off and 
 Pick role presets in `profile.yml` and override any field:
 
 ```yaml
-region: dach              # gcc, dach, uk, us (presets/regions/)
+region: dach              # gcc, dach, uk, us, eu (presets/regions/)
 tracks:
   - preset: backend        # mobile, ios, backend, frontend, fullstack, data, ai-ml, devops, qa, product-design
   - preset: data

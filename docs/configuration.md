@@ -129,6 +129,34 @@ avoid:
 | `region_lock_terms` | US, UK, EU, Europe, Canada, APAC, ... | "Must be based in the US" or "EU only" in a remote post drops it, unless the same sentence names one of your targets or remote-OK terms. |
 | `work_modes` | on-site, hybrid, remote | Remove a mode you do not want. |
 | `ai_description` | generated | How the AI scorer should read your location rules. |
+| `sponsored_regions` | empty | Region packs you would move to with a visa, e.g. `[dach, uk, eu]`. Their places count only when the post offers visa sponsorship. |
+| `sponsored_targets` | empty | The same, place by place: `[{name, terms, bonus}]`. Checked before `sponsored_regions`, so a `bonus` here prefers that place. |
+| `sponsored_remote` | `warn` | A remote job limited to a sponsored place, with no sponsorship: `warn` (alert, with "confirm you can work from your country"), `sponsor` (only with sponsorship) or `drop`. |
+| `sponsored_penalty` | 0.3 | Taken off the score of sponsored-place jobs, so your own targets rank first. |
+| `sponsorship_terms` | visa sponsorship, relocation package, blue card, ... | Phrases that offer sponsorship or relocation. |
+| `no_sponsorship_terms` | "cannot sponsor", "no sponsorship", "must have the right to work", ... | Checked first. A match drops a sponsored-place job. |
+
+### Abroad only with a visa
+
+Live in one region and want jobs elsewhere only when the employer sponsors your visa? Keep your own region in `targets` (or `region`) and add the others as sponsored places:
+
+```yaml
+region: gcc
+locations:
+  home_country: UAE
+  sponsored_regions: [dach, uk, eu]       # Germany, Austria, Switzerland, the UK and the rest of the EU
+  sponsored_targets:                      # optional: prefer one of them
+    - {name: Germany, terms: [germany, berlin, munich, hamburg], bonus: 0.2}
+  sponsored_remote: warn
+```
+
+| Job | Result |
+|---|---|
+| On-site or hybrid in Berlin, "we offer visa sponsorship" | Alert, "visa sponsorship offered", score 0.3 lower than a home job |
+| On-site in Berlin, sponsorship not mentioned | Dropped: "no visa sponsorship mentioned" |
+| "We cannot sponsor visas" or "must have the right to work in the UK" | Dropped: "no visa sponsorship" |
+| "Remote, Germany", nothing about sponsorship | Alert with "Remote in Germany only, confirm you can work from UAE" (`warn`) |
+| On-site in New York with sponsorship | Dropped, the US is not a sponsored place |
 
 To prefer one city or country, write your own `targets` (a list replaces the pack's list):
 
@@ -209,10 +237,10 @@ The first rule that fails gives the drop reason you see in `jobbot once --dry-ru
 2. Track: title rules in track order, then description signals for generic titles, then fallback tracks. No track: "not a ... role".
 3. Title checks: graduate titles, blocked seniority words, and senior titles on tracks without `senior` (only when the title is not a generic one such as "Senior Software Engineer", which may still turn out to be a match from its description).
 4. Graduate programs in the description, nationals-only patterns, languages, the track's `avoid` rules.
-5. Work mode, location and remote rules.
+5. Work mode, location and remote rules, then visa sponsorship for sponsored places.
 6. Years required (`max_years`), then senior titles on tracks without `senior` (the generic titles from step 3), then junior-only rules.
 7. Salary floor.
-8. Score: 3.0 + track `weight` + `bonus` + location `bonus` + 0.2 for comfortable years, minus 0.4 for a senior title and 0.2 for an unclear location. Capped to 1 to 5.
+8. Score: 3.0 + track `weight` + `bonus` + location `bonus` + 0.2 for comfortable years, minus `sponsored_penalty` for a sponsored place, minus 0.4 for a senior title and 0.2 for an unclear location. Capped to 1 to 5.
 
 So "Senior Software Engineer" in a city outside your targets is reported as a location drop, because step 5 comes before step 6.
 

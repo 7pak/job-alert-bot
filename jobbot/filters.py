@@ -254,6 +254,8 @@ class JobFilter:
                     continue
                 for rx in self.remote_restrict:
                     if m := rx.search(sent):
+                        if (t := self._sponsored_place(sent)) and p.sponsored_remote != "drop":
+                            return self._sponsored(job, t, v, remote=True)
                         return f"remote restricted ({m.group(0)[:50]})"
             leftover = REMOTE_LOC.sub(" ", loc)
             leftover = re.sub(r"[^A-Za-z ]+", " ", leftover).strip()
@@ -264,6 +266,8 @@ class JobFilter:
                     v.warnings.append(f"{m.group(0).upper()} remote, confirm {home} is allowed")
                 return None
             if leftover and not p.target_any.search(leftover):
+                if (t := self._sponsored_place(loc)) and p.sponsored_remote != "drop":
+                    return self._sponsored(job, t, v, remote=True)
                 return f"remote limited to {loc}"
             if not p.target_any.search(text) and not p.remote_ok.search(text):
                 v.warnings.append("Remote region not stated")
@@ -276,7 +280,33 @@ class JobFilter:
                 return None
             v.warnings.append("Location unknown")
             return None
+        if t := self._sponsored_place(loc):
+            return self._sponsored(job, t, v, remote=False)
         return f"{v.work_mode.lower()} outside {p.region_name} ({loc})"
+
+    def _sponsored_place(self, text: str):
+        return next((t for t in self.p.sponsored_targets if t.terms.search(text)), None)
+
+    def _sponsored(self, job: Job, target, v: Verdict, remote: bool) -> str | None:
+        """A job in a place that counts only with visa sponsorship (locations.sponsored_targets)."""
+        p, text = self.p, job.description
+        if m := p.sponsorship_no.search(text):
+            return f"no visa sponsorship ({m.group(0)[:50]})"
+        mode = "remote" if remote else v.work_mode.lower()
+        if p.sponsorship_yes.search(text):
+            v.positives.append("visa sponsorship offered")
+        elif remote and p.sponsored_remote == "warn":
+            home = p.home_country or "your country"
+            v.warnings.append(f"Remote in {target.name} only, confirm you can work from {home}")
+        else:
+            return f"no visa sponsorship mentioned ({mode}, {target.name})"
+        v.sponsored = target.name
+        if remote:
+            v.city = "Remote"
+        else:
+            parts = [x.strip() for x in re.split(r"[;|/]", job.location)]
+            v.city = next((x for x in parts if target.terms.search(x)), job.location).split(",")[0].strip()
+        return None
 
     def _years(self, text: str) -> tuple[int, int | None] | None:
         """Largest minimum-years requirement found, as (low, high)."""
@@ -354,7 +384,10 @@ class JobFilter:
             elif b.description and b.terms.search(text):
                 s += b.description
         target = next((t for t in p.targets if t.terms.search(loc)), None)
-        if target:
+        if v.sponsored:
+            sponsored = next((t for t in p.sponsored_targets if t.name == v.sponsored), None)
+            s += (sponsored.bonus if sponsored else 0.0) - p.sponsored_penalty
+        elif target:
             s += target.bonus
         if p.senior_title.search(title):
             s -= 0.4

@@ -1,0 +1,47 @@
+# Region pack: European Union (plus Norway and Switzerland). Use it with `region: eu` in profile.yml,
+# or as a place you would move to with a visa: `locations.sponsored_regions: [eu]`.
+locations:
+  region_name: the EU
+  targets:
+    - name: Germany
+      terms: [germany, deutschland, berlin, munich, münchen, hamburg, frankfurt, cologne, köln, stuttgart,
+              düsseldorf, dusseldorf, leipzig, dresden, nuremberg, karlsruhe]
+    - name: Netherlands
+      terms: [netherlands, the netherlands, holland, amsterdam, rotterdam, utrecht, eindhoven, the hague, delft]
+    - name: Ireland
+      terms: [ireland, dublin, cork, galway]
+    - name: France
+      terms: [france, paris, lyon, toulouse, nantes, lille, bordeaux, sophia antipolis]
+    - name: Spain
+      terms: [spain, españa, madrid, barcelona, valencia, malaga, málaga, seville, bilbao]
+    - name: Portugal
+      terms: [portugal, lisbon, lisboa, porto, braga]
+    - name: Nordics
+      terms: [sweden, stockholm, gothenburg, malmö, malmo, denmark, copenhagen, aarhus, finland, helsinki,
+              espoo, tampere, norway, oslo]
+    - name: Benelux
+      terms: [belgium, brussels, antwerp, ghent, luxembourg]
+    - name: Central Europe
+      terms: [austria, vienna, wien, switzerland, zurich, zürich, geneva, basel, poland, warsaw, krakow,
+              kraków, wroclaw, wrocław, gdansk, czechia, czech republic, prague, brno, hungary, budapest,
+              slovakia, bratislava, slovenia, ljubljana]
+    - name: Southern and Eastern Europe
+      terms: [italy, milan, milano, rome, turin, bologna, greece, athens, thessaloniki, cyprus, limassol,
+              nicosia, malta, croatia, zagreb, romania, bucharest, cluj, bulgaria, sofia, estonia, tallinn,
+              latvia, riga, lithuania, vilnius]
+    - name: Europe
+      terms: [EU, european union, europe]
+  remote_ok_terms: [europe, EU, european union, emea, CET, worldwide, anywhere, global, international,
+                    multiple locations, various]
+  confirm_remote_terms: [emea]
+
+salary:
+  currency: EUR
+  period: year
+
+# Used by `jobbot init` to fill in config.yml and suggest a timezone.
+search:
+  timezone: Europe/Amsterdam
+  locations: [Netherlands, Ireland, Spain, Portugal, France, Poland]
+  careerjet_locale: en_IE
+  linkedin_location: European Union

@@ -150,7 +150,7 @@ def merge(found: dict[tuple[str, str], dict], path: Path) -> None:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description="Find ATS boards with jobs in your region.")
-    ap.add_argument("--region", help="region pack name from presets/regions (gcc, dach, uk, us)")
+    ap.add_argument("--region", help="region pack name from presets/regions (gcc, dach, uk, us, eu)")
     ap.add_argument("--countries", help="comma separated place names, e.g. 'Germany,Berlin,Munich'")
     ap.add_argument("--no-verify", action="store_true", help="skip the live check of each board")
     ap.add_argument("--out", default=str(ROOT / "companies.yml"))

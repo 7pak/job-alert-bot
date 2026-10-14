@@ -115,6 +115,61 @@ class DataAnalystUS(unittest.TestCase):
         self.assertIn("~100k USD/yr", v.positives)
 
 
+class GccPlusSponsoredEurope(unittest.TestCase):
+    """Lives in the GCC; Germany, the UK and the EU count only with visa sponsorship."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.raw = {"region": "gcc", "tracks": [{"preset": "backend"}],
+                   "locations": {"home_country": "UAE", "sponsored_regions": ["dach", "uk", "eu"]}}
+        cls.f = JobFilter(profile_from(cls.raw))
+
+    def check(self, *a, **kw):
+        return self.f.evaluate(job(*a, **kw))
+
+    def test_sponsored_on_site_kept_below_home(self):
+        v = self.check("Backend Engineer", "Berlin, Germany", "We offer visa sponsorship and relocation support.")
+        self.assertTrue(v.keep, v.reason)
+        self.assertEqual((v.city, v.sponsored), ("Berlin", "Germany"))
+        self.assertIn("visa sponsorship offered", v.positives)
+        self.assertLess(v.score, self.check("Backend Engineer", "Dubai, United Arab Emirates").score)
+        self.assertTrue(self.check("Backend Engineer", "London, UK", "Visa sponsorship available.").keep)
+        self.assertEqual(self.check("Backend Engineer", "Amsterdam", "Relocation package included.").sponsored,
+                         "Netherlands")
+
+    def test_no_sponsorship(self):
+        self.assertIn("no visa sponsorship mentioned (on-site, Germany)", self.check("Backend Engineer", "Berlin").reason)
+        for text in ("We are unable to sponsor visas.", "We do not offer visa sponsorship.",
+                     "Sponsorship is not available for this role.", "You must have the right to work in Germany."):
+            self.assertIn("no visa sponsorship (", self.check("Backend Engineer", "Munich, Germany", text).reason, text)
+
+    def test_remote_limited_to_sponsored_place_warns(self):
+        v = self.check("Backend Engineer", "Remote - Germany")
+        self.assertTrue(v.keep, v.reason)
+        self.assertIn("Remote in Germany only, confirm you can work from UAE", v.warnings)
+        v = self.check("Backend Engineer", "Remote", "You must be based in the UK.")
+        self.assertTrue(v.keep, v.reason)
+        self.assertIn("no visa sponsorship", self.check("Backend Engineer", "Remote, United Kingdom",
+                                                        "You must have the right to work in the UK.").reason)
+
+    def test_other_places_unchanged(self):
+        self.assertIn("outside", self.check("Backend Engineer", "New York, NY", "Visa sponsorship available.").reason)
+        self.assertIn("remote limited", self.check("Backend Engineer", "Remote - United States").reason)
+        self.assertTrue(self.check("Backend Engineer", "Dubai", "We cannot sponsor visas.").keep)
+
+    def test_remote_policy_drop(self):
+        raw = {**self.raw, "locations": {**self.raw["locations"], "sponsored_remote": "drop"}}
+        f = JobFilter(profile_from(raw))
+        self.assertIn("remote limited", f.evaluate(job("Backend Engineer", "Remote - Germany")).reason)
+        self.assertTrue(f.evaluate(job("Backend Engineer", "Berlin", "Visa sponsorship provided.")).keep)
+
+    def test_ai_prompt_mentions_sponsorship(self):
+        from jobbot.ai import build_system_prompt
+        prompt = build_system_prompt(profile_from(self.raw))
+        self.assertIn("visa sponsorship", prompt)
+        self.assertIn("Germany", prompt)
+
+
 class Policies(unittest.TestCase):
     def base(self, **loc):
         return JobFilter(profile_from({"region": "uk", "tracks": [{"preset": "frontend"}],
